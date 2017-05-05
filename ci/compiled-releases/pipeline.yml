@@ -85,7 +85,6 @@ jobs:
       - put: compiled-releases
         params:
           file: "compiled-release/*.tgz"
-
   - name: compile-bosh-release-261-ubuntu-trusty-3363
     plan:
       - aggregate:

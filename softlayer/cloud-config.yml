@@ -19,6 +19,7 @@ vm_types:
     vmNamePrefix: ((sl_vm_name_prefix))
     domain: ((sl_vm_domain))
     datacenter: ((sl_datacenter))
+    sshKey: ((sl_public_ssh_key))
 
 disk_types:
 - name: default
@@ -34,27 +35,40 @@ networks:
   subnets:
   - range: ((internal_cidr))
     gateway: ((internal_gw))
-    azs: [z1, z2, z3]
+    azs: [z1]
     dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
     static: ((internal_static_ips))
     reserved: ((internal_reserved_ips))
     cloud_properties:
-      vlanId: ((sl_vlan_private))
+      vlanIds: [((sl_vlan_private))]
 
 - name: dynamic_public
   type: dynamic
-  dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
-  cloud_properties:
-    vlanId: ((sl_vlan_public_id))
+  subnets:
+  - cloud_properties:
+      vlanIds: [((sl_vlan_public_id))]
+    dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
+    azs: [z1]
 
 - name: dynamic_private
   type: dynamic
-  dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
-  cloud_properties:
-    vlanId: ((sl_vlan_private_id))
+  subnets:
+  - cloud_properties:
+      vlanIds: [((sl_vlan_private_id))]
+    dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
+    azs: [z1]
+
+- name: dynamic
+  type: dynamic
+  subnets:
+  - cloud_properties:
+      vlanIds: [((sl_vlan_public_id)), ((sl_vlan_private_id))]
+    dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
+    azs: [z1]
 
 compilation:
   workers: 5
   reuse_compilation_vms: true
   vm_type: default
   network: dynamic
+  az: z1

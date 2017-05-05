@@ -6,6 +6,7 @@
     url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bosh-warden-cpi-34-ubuntu-trusty-3421.3-20170605-211923-747693491-20170605211927.tgz?versionId=oTcLBgOUwALFfrI7dngskvHtDVBjhR.I
     sha1: 130b7fe5f920763b403a2c8e69763c4b0cdd6d50
 
+
 - type: replace
   path: /releases/-
   value:
