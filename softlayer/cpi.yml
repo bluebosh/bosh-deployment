@@ -21,6 +21,7 @@
 - type: replace
   path: /resource_pools/name=vms/cloud_properties?
   value:
+    datacenter: ((sl_datacenter))
     domain: ((sl_vm_domain))
     vmNamePrefix: ((sl_vm_name_prefix))
     ephemeralDiskSize: 100
@@ -38,13 +39,18 @@
   value: [8.8.8.8, 10.0.80.11, 10.0.80.12]
 
 - type: replace
+  path: /networks/name=default/subnets/0/cloud_properties?
+  value:
+    VlanId: ((sl_vlan_private)) 
+
+- type: replace
   path: /networks/-
   value:
     name: dynamic_public
     type: dynamic
     dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
     cloud_properties:
-      VlanId: ((sl_vlan_public_id))
+      VlanId: ((sl_vlan_public))
 
 - type: replace
   path: /networks/-
@@ -53,7 +59,7 @@
     type: dynamic
     dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
     cloud_properties:
-      VlanId: ((sl_vlan_private_id))
+      VlanId: ((sl_vlan_private))
 
 # Enable registry job
 - type: replace
@@ -110,6 +116,14 @@
   value: *cpi_job
 
 - type: replace
+  path: /cloud_provider/ssh_tunnel?
+  value:
+    host: ((internal_ip))
+    port: 22
+    user: vcap
+    private_key: ((ssh.private_key))
+
+- type: replace
   path: /instance_groups/name=bosh/properties/softlayer?
   value: &softlayer
     username: ((sl_username))
@@ -118,6 +132,12 @@
 - type: replace
   path: /cloud_provider/properties/softlayer?
   value: *softlayer
+
+- type: replace
+  path: /variables/-
+  value:
+    name: ssh
+    type: ssh
 
 - type: replace
   path: /variables/-
