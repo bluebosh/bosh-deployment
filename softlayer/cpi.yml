@@ -3,13 +3,15 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    url: file://bosh-softlayer-cpi-13.0.0.tgz
+    version: 15
+    url: https://bosh.io/d/github.com/cloudfoundry/bosh-softlayer-cpi-release?v=15
+    sha1: f0209e5565b64beccffa4482945c865890b5ca71
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
   value:
-    url: https://bosh.io/d/stemcells/bosh-softlayer-xen-ubuntu-trusty-go_agent?v=3363.20.1
-    sha1: fae42c77ca97f4dcd937a34b4f661abe202b7a57
+    url: https://s3.amazonaws.com/bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3421.6.1-softlayer-xen-ubuntu-trusty-go_agent.tgz
+    sha1: 3247aa3f0f485bb44509a32291f7b4d61aea93a3
 
 - type: replace
   path: /resource_pools/name=vms/env
@@ -29,6 +31,7 @@
     maxMemory: 8192
     deployedByBoshcli: true
     hourlyBillingFlag: true
+    sshKey: ((sl_ssh_key))
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
@@ -41,7 +44,7 @@
 - type: replace
   path: /networks/name=default/subnets/0/cloud_properties?
   value:
-    VlanId: ((sl_vlan_private)) 
+    vlanId: ((sl_vlan_private)) 
 
 - type: replace
   path: /networks/-
@@ -50,7 +53,7 @@
     type: dynamic
     dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
     cloud_properties:
-      VlanId: ((sl_vlan_public))
+      vlanId: ((sl_vlan_public))
 
 - type: replace
   path: /networks/-
@@ -59,7 +62,7 @@
     type: dynamic
     dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
     cloud_properties:
-      VlanId: ((sl_vlan_private))
+      vlanId: ((sl_vlan_private))
 
 # Enable registry job
 - type: replace
@@ -102,10 +105,7 @@
   path: /instance_groups/name=bosh/networks/-
   value:
     name: dynamic_public
-
-- type: replace
-  path: /instance_groups/name=bosh/networks/name=default/default?
-  value: [gateway, dns]
+    default: [gateway, dns]
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/cpi_job?
@@ -120,7 +120,7 @@
   value:
     host: ((internal_ip))
     port: 22
-    user: vcap
+    user: root
     private_key: ((ssh.private_key))
 
 - type: replace
