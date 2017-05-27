@@ -4,7 +4,7 @@
   value:
     name: bosh-softlayer-cpi
     version: 1
-    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-1.tgz
+    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-3.tgz
     sha1: f2942466ae9bd864a85650a8d074d948f02260e5
 
 - type: replace
@@ -118,20 +118,23 @@
 - type: replace
   path: /cloud_provider/ssh_tunnel?
   value:
-    host: ((internal_ip))
+    host: ((sl_director_fqn))
     port: 22
     user: root
     private_key: ((ssh.private_key))
 
 - type: replace
   path: /instance_groups/name=bosh/properties/softlayer?
-  value: &softlayer
+  value:
     username: ((sl_username))
     api_key: ((sl_api_key))
 
 - type: replace
   path: /cloud_provider/properties/softlayer?
-  value: *softlayer
+  value:
+    username: ((sl_username))
+    api_key: ((sl_api_key))
+    ssh_public_key: ((ssh.public_key))
 
 - type: replace
   path: /variables/-
