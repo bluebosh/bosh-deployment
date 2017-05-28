@@ -31,7 +31,6 @@
     maxMemory: 8192
     deployedByBoshcli: true
     hourlyBillingFlag: true
-    sshKey: ((sl_ssh_key))
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
@@ -135,6 +134,7 @@
     username: ((sl_username))
     api_key: ((sl_api_key))
     ssh_public_key: ((ssh.public_key))
+    ssh_public_key_fingerprint: ((ssh.public_key_fingerprint))
 
 - type: replace
   path: /variables/-
