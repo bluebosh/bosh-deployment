@@ -38,6 +38,8 @@ networks:
     dns: [((powerdns_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
     static: ((internal_static_ips))
     reserved: ((internal_reserved_ips))
+    cloud_properties:
+      vlanId: ((sl_vlan_private))
 
 - name: dynamic_public
   type: dynamic
