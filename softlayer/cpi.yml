@@ -13,10 +13,6 @@
     url: https://s3.amazonaws.com/bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3421.6.1-softlayer-xen-ubuntu-trusty-go_agent.tgz
     sha1: 3247aa3f0f485bb44509a32291f7b4d61aea93a3
 
-- type: replace
-  path: /resource_pools/name=vms/env/bosh/keep_root_password?
-  value: true
-
 # Configure sizes
 - type: replace
   path: /resource_pools/name=vms/cloud_properties?
@@ -77,6 +73,12 @@
     username: registry
     password: ((registry_password))
     port: 25777
+    
+- type: replace
+  path: /instance_groups/name=bosh/properties/softlayer?
+  value:
+    username: ((sl_username))
+    api_key: ((sl_api_key))
 
 # Add CPI job
 - type: replace
