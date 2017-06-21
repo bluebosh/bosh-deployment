@@ -24,10 +24,19 @@ vm_types:
 disk_types:
 - name: default
   disk_size: 100_000
+  cloud_properties:
+    iops: 3000
+    snapshotSpace: 10
 - name: small
   disk_size: 20_000
+  cloud_properties:
+    iops: 500
+    snapshotSpace: 5
 - name: large
   disk_size: 250_000
+  cloud_properties:
+    iops: 3000
+    snapshotSpace: 50
 
 networks:
 - name: default

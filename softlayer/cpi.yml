@@ -4,8 +4,8 @@
   value:
     name: bosh-softlayer-cpi
     version: 1
-    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-1.0.0.tgz
-    sha1: 4214b8200468a321df0726ef81cc627dd5bd1763
+    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-1.0.6.tgz
+    sha1: cbf5e6eeed00bd1f79c3cee7463f475ae1d59c36
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
@@ -28,7 +28,13 @@
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
-  value: 250_000
+  value: 100_000
+
+- type: replace
+  path: /disk_pools/name=disks/cloud_properties?
+  value:
+    iops: 3000
+    snapshotSpace: 10
 
 - type: replace
   path: /networks/name=default/subnets/0/dns
