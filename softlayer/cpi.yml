@@ -34,7 +34,7 @@
   path: /disk_pools/name=disks/cloud_properties?
   value:
     iops: 3000
-    snapshotSpace: 10
+    snapshotSpace: 20
 
 - type: replace
   path: /networks/name=default/subnets/0/dns

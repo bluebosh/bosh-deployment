@@ -74,6 +74,7 @@ instance_groups:
       generate_vm_passwords: true
       enable_dedicated_status_worker: true
       enable_nats_delivered_templates: true
+      enable_virtual_delete_vms: true
       workers: 4
       events:
         record_events: true
