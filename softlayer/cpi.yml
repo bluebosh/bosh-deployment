@@ -4,8 +4,8 @@
   value:
     name: bosh-softlayer-cpi
     version: 1
-    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-1.0.6.tgz
-    sha1: cbf5e6eeed00bd1f79c3cee7463f475ae1d59c36
+    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-1.0.7.tgz
+    sha1: 5f258f6ba40106622fbb5278b021f8f41c63d468
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
