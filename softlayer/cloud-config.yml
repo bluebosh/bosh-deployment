@@ -14,6 +14,7 @@ vm_types:
   cloud_properties:
     startCpus:  4
     maxMemory:  8192
+    maxNetworkSpeed: 100
     ephemeralDiskSize: 100
     hourlyBillingFlag: true
     vmNamePrefix: ((sl_vm_name_prefix))

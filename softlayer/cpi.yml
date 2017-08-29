@@ -23,6 +23,7 @@
     ephemeralDiskSize: 100
     startCpus: 4
     maxMemory: 8192
+    maxNetworkSpeed: 100
     deployedByBoshcli: true
     hourlyBillingFlag: true
 
