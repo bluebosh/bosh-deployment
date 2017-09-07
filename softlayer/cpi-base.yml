@@ -1,0 +1,92 @@
+---
+- type: replace
+  path: /releases/-
+  value:
+    name: bosh-softlayer-cpi
+    version: 1
+    url: https://s3.amazonaws.com/bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.12.tgz
+    sha1: 9b9f49e9a33d769633b5adae8daed9671329fa2a
+
+- type: replace
+  path: /resource_pools/name=vms/stemcell?
+  value:
+    url: https://s3.amazonaws.com/bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3445.2.11-softlayer-xen-ubuntu-trusty-go_agent.tgz
+    sha1: 4a4b90732839553b9dd9c86327e1de517e6bb437
+
+- type: replace
+  path: /resource_pools/name=vms/cloud_properties?
+  value:
+    datacenter: ((sl_datacenter))
+    domain: ((sl_vm_domain))
+    vmNamePrefix: ((sl_vm_name_prefix))
+    ephemeralDiskSize: 100
+    startCpus: 4
+    maxMemory: 8192
+    maxNetworkSpeed: 100
+    deployedByBoshcli: true
+    hourlyBillingFlag: true
+
+- type: replace
+  path: /disk_pools/name=disks/disk_size
+  value: 100_000
+
+- type: replace
+  path: /disk_pools/name=disks/cloud_properties?
+  value:
+    iops: 3000
+    snapshotSpace: 20
+
+- type: replace
+  path: /instance_groups/name=bosh/jobs/-
+  value:
+    name: registry
+    release: bosh
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/softlayer?
+  value:
+    username: ((sl_username))
+    api_key: ((sl_api_key))
+
+- type: replace
+  path: /instance_groups/name=bosh/jobs/-
+  value: &cpi_job
+    name: softlayer_cpi
+    release: bosh-softlayer-cpi
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/cpi_job?
+  value: softlayer_cpi
+
+- type: replace
+  path: /cloud_provider/template?
+  value: *cpi_job
+
+- type: replace
+  path: /cloud_provider/ssh_tunnel?
+  value:
+    host: ((sl_director_fqn))
+    port: 22
+    user: root
+    private_key: ((ssh.private_key))
+
+- type: replace
+  path: /cloud_provider/properties/softlayer?
+  value:
+    username: ((sl_username))
+    api_key: ((sl_api_key))
+    ssh_public_key: ((ssh.public_key))
+    ssh_public_key_fingerprint: ((ssh.public_key_fingerprint))
+
+- type: replace
+  path: /variables/-
+  value:
+    name: ssh
+    type: ssh
+
+- type: replace
+  path: /variables/-
+  value:
+    name: registry_password
+    type: password
+    

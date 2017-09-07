@@ -1,0 +1,42 @@
+- type: replace
+  path: /networks/name=default?
+  value:
+    name: dynamic
+    type: dynamic
+    dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
+    cloud_properties:
+      vlanIds: [((sl_vlan_public)), ((sl_vlan_private))]
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/registry?
+  value:
+    address: ((internal_ip))
+    host: ((internal_ip))
+    db:
+      host: 127.0.0.1
+      user: postgres
+      password: ((postgres_password))
+      database: bosh
+      adapter: postgres
+    http:
+      user: registry
+      password: ((registry_password))
+      port: 25777
+    username: registry
+    password: ((registry_password))
+    port: 25777
+
+- type: replace
+  path: /resource_pools/name=vms/network
+  value: dynamic
+
+
+- type: replace
+  path: /instance_groups/name=bosh/networks/name=default?
+  value: 
+    name: dynamic
+    default: [gateway, dns]   
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
+  value: true  
