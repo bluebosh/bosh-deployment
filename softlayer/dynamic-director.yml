@@ -39,4 +39,8 @@
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
-  value: true  
+  value: true
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/blobstore/address?
+  value: 127.0.0.1
