@@ -11,7 +11,7 @@
   path: /instance_groups/name=bosh/properties/registry?
   value:
     address: ((internal_ip))
-    host: ((internal_ip))
+    host: 127.0.0.1
     db:
       host: 127.0.0.1
       user: postgres
