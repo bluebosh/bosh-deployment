@@ -99,3 +99,7 @@
 - type: replace
   path: /cloud_provider/properties/softlayer?
   value: *softlayer
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/blobstore/address?
+  value: 127.0.0.1
