@@ -1,13 +1,13 @@
 azs:
 - name: z1
   cloud_properties:
-    datacenter: { name: ((sl_datacenter)) }
+    datacenter: ((sl_datacenter))
 - name: z2
   cloud_properties:
-    datacenter: { name: ((sl_datacenter)) }
+    datacenter: ((sl_datacenter))
 - name: z3
   cloud_properties:
-    datacenter: { name: ((sl_datacenter)) }
+    datacenter: ((sl_datacenter))
 
 vm_types:
 - name: default
