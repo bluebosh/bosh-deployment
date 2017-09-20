@@ -4,7 +4,7 @@ azs:
     datacenter: ((sl_datacenter))
 
 networks:
-  name: default
+- name: default
   type: dynamic
   subnets:
   - range: ((internal_cidr))
@@ -89,6 +89,6 @@ vm_extensions:
 compilation:
   workers: 5
   reuse_compilation_vms: true
-  vm_type: default
-  network: dynamic
+  vm_type: small
+  network: default
   az: z1

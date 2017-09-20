@@ -3,9 +3,9 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    version: 4.0.28
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.28.tgz
-    sha1: 2718ee01e36768eecbcafb6d8e870e5fa1966a72
+    version: 4.0.29
+    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.29.tgz
+    sha1: 057a409765a887d77a6ee0dd720e846e48712d17
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
