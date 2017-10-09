@@ -1,0 +1,106 @@
+networks:
+- name: default
+  type: dynamic
+  subnets:
+  - cloud_properties:
+      vlanIds: [((sl_vlan_public_id)), ((sl_vlan_private_id))]
+    dns: [((director_ip)), 8.8.8.8, 10.0.80.11, 10.0.80.12]
+
+resource_pools:
+  - name: coreNode
+    cloud_properties:
+      maxNetworkSpeed: 100
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 32768
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-core
+      domain: ((sl_vm_domain))
+      datacenter: ((sl_datacenter))
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+  - name: brain
+    cloud_properties:
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-brain
+      domain: ((sl_vm_domain))
+      datacenter: ((sl_datacenter))
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+  - name: cc_bridge
+    cloud_properties:
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-cc-bridge
+      domain: ((sl_vm_domain))
+      datacenter: ((sl_datacenter))
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+  - name: access
+    cloud_properties:
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-access
+      domain: ((sl_vm_domain))
+      datacenter: ((sl_datacenter))
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+  - name: route_emitter
+    cloud_properties:
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-router
+      domain: ((sl_vm_domain))
+      datacenter: ((sl_datacenter))
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+
+disk_types:
+- disk_size: 20480
+  name: dp_20G
+
+vm_extensions:
+  - name: cf-router-network-properties
+  - name: cf-tcp-router-network-properties
+  - name: diego-ssh-proxy-network-properties
+  - name: 50GB_ephemeral_disk
+    cloud_properties:
+      disk: 51200
+  - name: 100GB_ephemeral_disk
+    cloud_properties:
+      disk: 102400
+
+compilation:
+  cloud_properties:
+    ephemeralDiskSize: 100
+    hourlyBillingFlag: true
+    maxMemory: 8192
+    startCpus: 4
+    vmNamePrefix: ((deploy_name))-worker
+    domain: ((sl_vm_domain))
+    datacenter: ((sl_datacenter))
+  env:
+    bosh:
+      keep_root_password: true
+  network: default
+  reuse_compilation_vms: true
+  workers: 8
