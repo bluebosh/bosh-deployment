@@ -73,6 +73,49 @@ resource_pools:
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
       version: 3445.11.3
+  - name: database
+    cloud_properties:
+      datacenter: ((sl_datacenter))
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-db
+      domain: softlayer.com
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+  - name: cell
+    cloud_properties:
+      datacenter: ((sl_datacenter))
+      ephemeralDiskSize: 300
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 32768
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-cell
+      domain: softlayer.com
+    size: 5
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
+    update:
+      canaries: 1
+      max_in_flight: 10
+  - name: errandsPool
+    cloud_properties:
+      datacenter: ((sl_datacenter))
+      ephemeralDiskSize: 100
+      hourlyBillingFlag: true
+      localDiskFlag: true
+      maxMemory: 8192
+      startCpus: 4
+      vmNamePrefix: ((deploy_name))-diego-errand
+      domain: softlayer.com
+    stemcell:
+      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
+      version: 3445.11.3
 
 disk_types:
 - disk_size: 20480
