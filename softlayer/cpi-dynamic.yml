@@ -3,7 +3,7 @@
   value:
     name: dynamic
     type: dynamic
-    dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
+    dns: [((dns_recursor_ip)), 10.0.80.11, 10.0.80.12]
     cloud_properties:
       vlanIds: [((sl_vlan_public)), ((sl_vlan_private))]
 
@@ -27,15 +27,10 @@
     port: 25777
 
 - type: replace
-  path: /resource_pools/name=vms/network
-  value: dynamic
-
-
-- type: replace
   path: /instance_groups/name=bosh/networks/name=default?
-  value: 
+  value:
     name: dynamic
-    default: [gateway, dns]   
+    default: [gateway, dns]
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
