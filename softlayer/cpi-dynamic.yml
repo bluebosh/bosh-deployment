@@ -28,6 +28,10 @@
     default: [gateway, dns]
 
 - type: replace
+  path: /resource_pools/name=vms/network?
+  value: dynamic
+
+- type: replace
   path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
   value: true
 
