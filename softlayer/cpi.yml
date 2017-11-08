@@ -19,13 +19,13 @@
   value:
     datacenter: ((sl_datacenter))
     domain: ((sl_vm_domain))
-    vmNamePrefix: ((sl_vm_name_prefix))
-    ephemeralDiskSize: 100
-    startCpus: 4
-    maxMemory: 8192
-    maxNetworkSpeed: 100
-    deployedByBoshcli: true
-    hourlyBillingFlag: true
+    hostname_prefix: ((sl_vm_name_prefix))
+    ephemeral_disk_size: 100
+    cpu: 4
+    memory: 8192
+    max_network_speed: 100
+    deployed_by_boshcli: true
+    hourly_billing_flag: true
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
@@ -35,7 +35,7 @@
   path: /disk_pools/name=disks/cloud_properties?
   value:
     iops: 3000
-    snapshotSpace: 20
+    snapshot_space: 20
 
 - type: replace
   path: /networks/name=default/subnets/0/dns
@@ -44,7 +44,7 @@
 - type: replace
   path: /networks/name=default/subnets/0/cloud_properties?
   value:
-    vlanIds: [ ((sl_vlan_private)) ] 
+    vlan_ids: [ ((sl_vlan_private)) ]
 
 - type: replace
   path: /networks/-
@@ -53,7 +53,7 @@
     type: dynamic
     dns: [8.8.8.8, 10.0.80.11, 10.0.80.12]
     cloud_properties:
-      vlanIds: [((sl_vlan_public)), ((sl_vlan_private))]
+      vlan_ids: [((sl_vlan_public)), ((sl_vlan_private))]
 
 # Enable registry job
 - type: replace

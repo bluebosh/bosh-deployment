@@ -18,13 +18,13 @@
   value:
     datacenter: ((sl_datacenter))
     domain: ((sl_vm_domain))
-    vmNamePrefix: ((sl_vm_name_prefix))
-    ephemeralDiskSize: 100
-    startCpus: 4
-    maxMemory: 8192
-    maxNetworkSpeed: 100
-    deployedByBoshcli: true
-    hourlyBillingFlag: true
+    hostname_prefix: ((sl_vm_name_prefix))
+    ephemeral_disk_size: 100
+    cpu: 4
+    memory: 8192
+    max_network_speed: 100
+    deployed_by_boshcli: true
+    hourly_billing_flag: true
 
 - type: replace
   path: /disk_pools/name=disks/disk_size
@@ -34,7 +34,7 @@
   path: /disk_pools/name=disks/cloud_properties?
   value:
     iops: 3000
-    snapshotSpace: 20
+    snapshot_space: 20
 
 - type: replace
   path: /instance_groups/name=bosh/jobs/-
