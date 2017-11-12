@@ -14,10 +14,10 @@ networks:
     cloud_properties:
       PrimaryNetworkComponent:
         NetworkVlan:
-          Id: ((sl_vlan_public))
+          Id: ((sl_vlan_public_id))
       PrimaryBackendNetworkComponent:
         NetworkVlan:
-          Id: ((sl_vlan_private))
+          Id: ((sl_vlan_private_id))
 
 vm_types:
   - name: minimal
