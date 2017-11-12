@@ -25,7 +25,7 @@ vm_types:
       bosh_ip: ((director_ip))
       startCpus:  1
       maxMemory:  4096
-      maxMemory: 100
+      ephemeralDiskSize: 100
       hourlyBillingFlag: true
       vmNamePrefix: ((sl_vm_name_prefix))
       domain: ((sl_vm_domain))
@@ -34,7 +34,7 @@ vm_types:
       bosh_ip: ((director_ip))
       startCpus:  2
       maxMemory:  8192
-      maxMemory: 100
+      ephemeralDiskSize: 100
       hourlyBillingFlag: true
       vmNamePrefix: ((sl_vm_name_prefix))
       domain: ((sl_vm_domain))
@@ -43,7 +43,7 @@ vm_types:
       bosh_ip: ((director_ip))
       startCpus:  4
       maxMemory:  32768
-      maxMemory: 100
+      ephemeralDiskSize: 100
       hourlyBillingFlag: true
       vmNamePrefix: ((sl_vm_name_prefix))
       domain: ((sl_vm_domain))
@@ -52,7 +52,7 @@ vm_types:
       bosh_ip: ((director_ip))
       startCpus:  1
       maxMemory:  2048
-      maxMemory: 100
+      ephemeralDiskSize: 100
       hourlyBillingFlag: true
       vmNamePrefix: ((sl_vm_name_prefix))
       domain: ((sl_vm_domain))
