@@ -3,9 +3,9 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    version: 4.0.38
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.38.tgz
-    sha1: 1a0537731343109c1316be32fbd86317f2234eeb
+    version: 4.0.73
+    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.73.tgz
+    sha1: 988fce265df2f0a6cc1a241cce7d2f451ce936cb
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
@@ -18,12 +18,12 @@
   value:
     datacenter: ((sl_datacenter))
     domain: ((sl_vm_domain))
-    vmNamePrefix: ((sl_vm_name_prefix))
-    ephemeralDiskSize: 100
-    startCpus: 4
-    maxMemory: 8192
-    maxNetworkSpeed: 100
-    deployedByBoshcli: true
+    hostname_prefix: ((sl_vm_name_prefix))
+    ephemeral_disk_size: 100
+    cpu: 4
+    memory: 8192
+    max_network_speed: 100
+    deployed_by_boshcli: true
     hourlyBillingFlag: true
 
 - type: replace
