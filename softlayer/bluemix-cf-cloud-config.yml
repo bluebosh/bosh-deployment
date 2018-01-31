@@ -20,7 +20,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: brain
     cloud_properties:
       ephemeral_disk_size: 100
@@ -33,7 +33,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: cc_bridge
     cloud_properties:
       ephemeral_disk_size: 100
@@ -46,7 +46,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: access
     cloud_properties:
       ephemeral_disk_size: 100
@@ -59,7 +59,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: route_emitter
     cloud_properties:
       ephemeral_disk_size: 100
@@ -72,7 +72,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: database
     cloud_properties:
       datacenter: ((sl_datacenter))
@@ -85,7 +85,7 @@ resource_pools:
       domain: softlayer.com
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
   - name: cell
     cloud_properties:
       datacenter: ((sl_datacenter))
@@ -99,7 +99,7 @@ resource_pools:
     size: 5
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
     update:
       canaries: 1
       max_in_flight: 10
@@ -115,7 +115,7 @@ resource_pools:
       domain: softlayer.com
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: 3445.11.3
+      version: latest
 
 disk_types:
 - disk_size: 20480
