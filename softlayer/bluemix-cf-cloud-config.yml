@@ -20,7 +20,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
   - name: brain
     cloud_properties:
       ephemeral_disk_size: 100
@@ -33,7 +33,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
   - name: cc_bridge
     cloud_properties:
       ephemeral_disk_size: 100
@@ -46,7 +46,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
   - name: access
     cloud_properties:
       ephemeral_disk_size: 100
@@ -59,20 +59,7 @@ resource_pools:
       datacenter: ((sl_datacenter))
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
-  - name: route_emitter
-    cloud_properties:
-      ephemeral_disk_size: 100
-      hourly_billing_flag: true
-      local_disk_flag: true
-      memory: 8192
-      cpu: 4
-      hostname_prefix: ((deploy_name))-diego-router
-      domain: ((sl_vm_domain))
-      datacenter: ((sl_datacenter))
-    stemcell:
-      name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
   - name: database
     cloud_properties:
       datacenter: ((sl_datacenter))
@@ -85,7 +72,7 @@ resource_pools:
       domain: softlayer.com
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
   - name: cell
     cloud_properties:
       datacenter: ((sl_datacenter))
@@ -99,7 +86,7 @@ resource_pools:
     size: 5
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
     update:
       canaries: 1
       max_in_flight: 10
@@ -115,7 +102,7 @@ resource_pools:
       domain: softlayer.com
     stemcell:
       name: bosh-bluemix-xen-ubuntu-trusty-go_agent
-      version: latest
+      version: 3468.21.1
 
 disk_types:
 - disk_size: 20480
@@ -131,6 +118,8 @@ vm_extensions:
   - name: 100GB_ephemeral_disk
     cloud_properties:
       disk: 102400
+
+stemcell_location: https://s3.amazonaws.com/ng-bosh-softlayer-stemcells-bluemix-candidate-container/light-bosh-stemcell-3468.21.1-bluemix-xen-ubuntu-trusty-go_agent.tgz
 
 compilation:
   cloud_properties:
