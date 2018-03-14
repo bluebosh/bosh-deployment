@@ -80,7 +80,11 @@
     username: registry
     password: ((registry_password))
     port: 25777
-    
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/nats/address?
+  value: 127.0.0.1
+
 - type: replace
   path: /instance_groups/name=bosh/properties/softlayer?
   value:
@@ -103,6 +107,10 @@
 - type: replace
   path: /instance_groups/name=bosh/properties/director/cpi_job?
   value: softlayer_cpi
+
+- type: replace
+  path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
+  value: true
 
 - type: replace
   path: /cloud_provider/template?

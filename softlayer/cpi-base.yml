@@ -43,6 +43,10 @@
     release: bosh
 
 - type: replace
+  path: /instance_groups/name=bosh/properties/nats/address?
+  value: 127.0.0.1
+
+- type: replace
   path: /instance_groups/name=bosh/properties/softlayer?
   value:
     username: ((sl_username))

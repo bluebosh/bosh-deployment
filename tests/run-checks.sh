@@ -2,11 +2,14 @@
 
 set -eu
 
-vars_store_prefix=/tmp/bosh-deployment-test
+cd ..
+
+tmp_file=/tmp/bosh-deployment-test
+touch $tmp_file
 
 clean_tmp() {
-  rm -f $vars_store_prefix
-  rm -f ${vars_store_prefix}.*
+  rm -f $tmp_file
+  rm -f ${tmp_file}.*
 }
 
 trap clean_tmp EXIT
@@ -17,11 +20,19 @@ function bosh() {
   command bosh int --var-errs --var-errs-unused ${@//--state=*/} > /dev/null
 }
 
+echo -e "\nUsed compiled releases\n"
+grep -r -i s3.amazonaws.com/bosh-compiled-release-tarballs . | grep -v grep | grep -v ./.git
+
+echo -e "\nUsed stemcells\n"
+grep -r -i d/stemcells . | grep -v grep | grep -v ./.git
+
+echo -e "\nExamples\n"
+
 echo "- AWS"
 bosh create-env bosh.yml \
   -o aws/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -39,8 +50,8 @@ echo "- AWS with UAA"
 bosh create-env bosh.yml \
   -o aws/cpi.yml \
   -o uaa.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -58,9 +69,9 @@ echo "- AWS with UAA + config-server"
 bosh create-env bosh.yml \
   -o aws/cpi.yml \
   -o uaa.yml \
-  -o config-server.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  -o misc/config-server.yml \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -80,8 +91,8 @@ bosh create-env bosh.yml \
   -o uaa.yml \
   -o credhub.yml \
   -o turbulence.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -101,7 +112,7 @@ bosh deploy bosh.yml \
   -o aws/cpi.yml \
   -o uaa.yml \
   -o misc/bosh-dev.yml \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_ip=test \
   -v access_key_id=test \
@@ -115,8 +126,8 @@ bosh create-env bosh.yml \
   -o aws/cpi.yml \
   -o misc/external-db.yml \
   -o misc/dns.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -147,8 +158,8 @@ bosh update-cloud-config aws/cloud-config.yml \
 echo "- GCP"
 bosh create-env bosh.yml \
   -o gcp/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -164,8 +175,8 @@ echo "- GCP with UAA"
 bosh create-env bosh.yml \
   -o gcp/cpi.yml \
   -o uaa.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -183,8 +194,8 @@ bosh create-env bosh.yml \
   -o uaa.yml \
   -o external-ip-not-recommended.yml \
   -o external-ip-not-recommended-uaa.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -201,8 +212,8 @@ echo "- GCP with BOSH Lite"
 bosh create-env bosh.yml \
   -o gcp/cpi.yml \
   -o bosh-lite.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -218,8 +229,8 @@ echo "- GCP with BOSH Lite on Docker"
 bosh create-env bosh.yml \
   -o gcp/cpi.yml \
   -o bosh-lite-docker.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -235,8 +246,8 @@ echo "- GCP with external db"
 bosh create-env bosh.yml \
   -o gcp/cpi.yml \
   -o misc/external-db.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -266,8 +277,8 @@ bosh update-cloud-config gcp/cloud-config.yml \
 echo "- Openstack"
 bosh create-env bosh.yml \
   -o openstack/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -294,8 +305,8 @@ bosh update-cloud-config openstack/cloud-config.yml \
 echo "- vSphere"
 bosh create-env bosh.yml \
   -o vsphere/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -314,8 +325,8 @@ bosh create-env bosh.yml \
 echo "- vCloud"
 bosh create-env bosh.yml \
   -o vcloud/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=test \
   -v internal_gw=test \
@@ -337,8 +348,8 @@ bosh update-cloud-config vsphere/cloud-config.yml \
 echo "- Azure"
 bosh create-env bosh.yml \
   -o azure/cpi.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=10.0.0.0/24 \
   -v internal_gw=10.0.0.1 \
@@ -357,8 +368,8 @@ echo "- Azure (custom-environment)"
 bosh create-env bosh.yml \
   -o azure/cpi.yml \
   -o azure/custom-environment.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=test \
   -v internal_cidr=10.0.0.0/24 \
   -v internal_gw=10.0.0.1 \
@@ -386,12 +397,35 @@ echo "- VirtualBox with BOSH Lite"
 bosh create-env bosh.yml \
   -o virtualbox/cpi.yml \
   -o bosh-lite.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=vbox \
   -v internal_ip=192.168.56.6 \
   -v internal_gw=192.168.56.1 \
   -v internal_cidr=192.168.56.0/24
+
+echo "- VirtualBox with IPv6 (remote)"
+bosh create-env bosh.yml \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
+  -o virtualbox/cpi.yml \
+  -o virtualbox/outbound-network.yml \
+  -o jumpbox-user.yml \
+  -o uaa.yml \
+  -o credhub.yml \
+  -o misc/ipv6/bosh.yml \
+  -o misc/ipv6/uaa.yml \
+  -o misc/ipv6/credhub.yml \
+  -o virtualbox/remote.yml \
+  -o virtualbox/ipv6/cpi.yml \
+  -o virtualbox/ipv6/remote.yml \
+  -v director_name=vbox \
+  -v internal_cidr=fd7a:eeed:e696:969f:0000:0000:0000:0000/64 \
+  -v internal_gw=fd7a:eeed:e696:969f:0000:0000:0000:0001 \
+  -v internal_ip=fd7a:eeed:e696:969f:0000:0000:0000:0004 \
+  -v outbound_network_name=NatNetwork \
+  -v vbox_host=fd7a:eeed:e696:969f:0000:0000:0000:0001 \
+  -v vbox_username=test
 
 echo "- VirtualBox with BOSH Lite with garden-runc"
 bosh create-env bosh.yml \
@@ -399,8 +433,8 @@ bosh create-env bosh.yml \
   -o bosh-lite.yml \
   -o bosh-lite-runc.yml \
   -o jumpbox-user.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=vbox \
   -v internal_ip=192.168.56.6 \
   -v internal_gw=192.168.56.1 \
@@ -413,14 +447,16 @@ echo "- Docker"
 bosh create-env bosh.yml \
   -o docker/cpi.yml \
   -o jumpbox-user.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=docker \
   -v internal_cidr=10.245.0.0/16 \
   -v internal_gw=10.245.0.1 \
   -v internal_ip=10.245.0.10 \
   -v docker_host=tcp://192.168.50.8:4243 \
-  -v docker_tls=ca_cert \
+  --var-file docker_tls.ca=$tmp_file \
+  --var-file docker_tls.certificate=$tmp_file \
+  --var-file docker_tls.private_key=$tmp_file \
   -v network=net3
 
 echo "- Docker via UNIX sock"
@@ -428,8 +464,8 @@ bosh create-env bosh.yml \
   -o docker/cpi.yml \
   -o docker/unix-sock.yml \
   -o jumpbox-user.yml \
-  --state=$vars_store_prefix \
-  --vars-store $(mktemp ${vars_store_prefix}.XXXXXX) \
+  --state=$tmp_file \
+  --vars-store $(mktemp ${tmp_file}.XXXXXX) \
   -v director_name=docker \
   -v internal_cidr=10.245.0.0/16 \
   -v internal_gw=10.245.0.1 \
