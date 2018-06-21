@@ -4,8 +4,8 @@ name: bosh
 releases:
 - name: bosh
   version: "266.2.0"
-  url: https://s3.amazonaws.com/bosh-compiled-release-tarballs/bosh-266.2.0-ubuntu-trusty-3586.16-20180611-175207-293401672-20180611175210.tgz?versionId=SBu7LrRQFLuPNYoCGHQPO_3UlgYS5qc2
-  sha1: 8dd0cfdf58a591200d45141cee51358202fbe380
+  url: https://bosh.io/d/github.com/cloudfoundry/bosh?v=266.2.0
+  sha1: e181568c96858139391abf56fe068d56b10140cf
 
 resource_pools:
 - name: vms
