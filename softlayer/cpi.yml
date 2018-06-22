@@ -10,8 +10,8 @@
 - type: replace
   path: /resource_pools/name=vms/stemcell?
   value:
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3541.5.10-softlayer-xen-ubuntu-trusty-go_agent.tgz
-    sha1: f8b09ff44d6bc9b54bc2b1d89565085e3653c784
+    url: https://s3.amazonaws.com/ng-bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3541.5.11-softlayer-xen-ubuntu-trusty-go_agent.tgz
+    sha1: 7c168a64dcd87d941b91bf488e916cccc7af241b
 
 # Configure sizes
 - type: replace
