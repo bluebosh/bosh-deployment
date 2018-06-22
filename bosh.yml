@@ -6,6 +6,10 @@ releases:
   version: "266.2.0"
   url: https://bosh.io/d/github.com/cloudfoundry/bosh?v=266.2.0
   sha1: e181568c96858139391abf56fe068d56b10140cf
+- name: bpm
+  version: "0.6.0"
+  url: https://bosh.io/d/github.com/cloudfoundry-incubator/bpm-release?v=0.6.0
+  sha1: 4f0f239abdc801d71de9063625aa56e3c42634b5
 
 resource_pools:
 - name: vms
@@ -33,6 +37,7 @@ instance_groups:
 - name: bosh
   instances: 1
   jobs:
+  - {name: bpm, release: bpm}
   - {name: nats, release: bosh}
   - {name: postgres-9.4, release: bosh}
   - {name: blobstore, release: bosh}
