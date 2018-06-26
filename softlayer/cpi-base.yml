@@ -3,15 +3,15 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    version: 4.0.91
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.91.tgz
-    sha1: 28498fad0f2c8b20b1c26a7fa0f6049a7cfb44ee
+    version: 4.0.105
+    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.105.tgz
+    sha1: 462208ec398197856f63f51a2996b88673524530
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
   value:
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3541.5.10-softlayer-xen-ubuntu-trusty-go_agent.tgz
-    sha1: f8b09ff44d6bc9b54bc2b1d89565085e3653c784
+    url: https://s3.amazonaws.com/ng-bosh-softlayer-stemcells-candidate-container/light-bosh-stemcell-3541.5.14-softlayer-xen-ubuntu-trusty-go_agent.tgz
+    sha1: b025a46453ad2a11e4b39c80891ebc1d78e42711
 
 - type: replace
   path: /resource_pools/name=vms/cloud_properties?
