@@ -3,15 +3,15 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    version: 4.0.106
-    url: https://s3.amazonaws.com/ng-bosh-softlayer-lite-cpi-release/bosh-softlayer-cpi-4.0.106.tgz
-    sha1: 1f6b369ee33c3206a36a5cc16fd7ce22a4e85f08
+    version: 30.0.0
+    url: https://s3.amazonaws.com/bosh-softlayer-cpi-pipeline/bosh-softlayer-cpi-30.0.0.tgz
+    sha1: 47b811e3ba7625f6a89372c6c3109e17e3f00bab
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
   value:
-    url: https://s3.amazonaws.com/bosh-softlayer-stemcells-bluemix-candidate-container/light-bosh-stemcell-81.0.0-ng.6-bluemix-xen-ubuntu-xenial-go_agent.tgz
-    sha1: 55e6010f3a29beaef05d48ebce3e0c4dd0db056f
+    url: https://s3.amazonaws.com/bosh-softlayer-stemcells-bluemix-candidate-container/light-bosh-stemcell-97.0.1-bluemix-xen-ubuntu-xenial-go_agent.tgz
+    sha1: 0cf1f95ec1cf7c0758a0a882a0040621492f0cdb
 
 # Configure sizes
 - type: replace

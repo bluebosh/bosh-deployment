@@ -3,15 +3,15 @@
   path: /releases/-
   value:
     name: bosh-softlayer-cpi
-    version: "23"
-    url: https://bosh.io/d/github.com/cloudfoundry/bosh-softlayer-cpi-release?v=23
-    sha1: 960f6068c7823bc3822c5e7ec6c855060c5582d0
+    version: 30.0.0
+    url: https://s3.amazonaws.com/bosh-softlayer-cpi-pipeline/bosh-softlayer-cpi-30.0.0.tgz
+    sha1: 47b811e3ba7625f6a89372c6c3109e17e3f00bab
 
 - type: replace
   path: /resource_pools/name=vms/stemcell?
   value:
-    url: https://bosh.io/d/stemcells/bosh-softlayer-xen-ubuntu-trusty-go_agent?v=3468.20
-    sha1: 3e0945585eecc49183a8f4fcd8c6a97e3809040c
+    url: https://s3.amazonaws.com/bosh-softlayer-stemcells-bluemix-candidate-container/light-bosh-stemcell-97.0.1-bluemix-xen-ubuntu-xenial-go_agent.tgz
+    sha1: 0cf1f95ec1cf7c0758a0a882a0040621492f0cdb
 
 - type: replace
   path: /resource_pools/name=vms/env/bosh/keep_root_password?
