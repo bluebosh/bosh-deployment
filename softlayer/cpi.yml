@@ -91,7 +91,7 @@
 - type: replace
   path: /instance_groups/name=bosh/jobs/-
   value: &cpi_job
-    name: softlayer_cpi
+    name: softlayer_ng_cpi
     release: bosh-softlayer-cpi
 
 - type: replace
@@ -102,7 +102,7 @@
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/cpi_job?
-  value: softlayer_cpi
+  value: softlayer_ng_cpi
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
