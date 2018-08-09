@@ -4,7 +4,7 @@
   value:
     name: bosh-softlayer-cpi
     version: 23
-    url: https://bosh.io/d/github.com/cloudfoundry/bosh-softlayer-cpi-release?v=23
+    url: https://bosh.io/d/github.com/cloudfoundry/bosh-softlayer-cpi-release?v=24.0.0
     sha1: 960f6068c7823bc3822c5e7ec6c855060c5582d0
 
 - type: replace
@@ -59,7 +59,7 @@
 - type: replace
   path: /instance_groups/name=bosh/jobs/-
   value: &cpi_job
-    name: softlayer_cpi
+    name: softlayer_legacy_cpi
     release: bosh-softlayer-cpi
 
 - type: replace
@@ -70,7 +70,7 @@
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/cpi_job?
-  value: softlayer_cpi
+  value: softlayer_legacy_cpi
 
 - type: replace
   path: /instance_groups/name=bosh/properties/director/enable_virtual_delete_vms?
@@ -81,11 +81,11 @@
   value: *cpi_job
 
 - type: replace
-  path: /instance_groups/name=bosh/properties/softlayer?
+  path: /instance_groups/name=bosh/properties/softlayer_legacy?
   value: &softlayer
     username: ((sl_username))
     apiKey: ((sl_api_key))
 
 - type: replace
-  path: /cloud_provider/properties/softlayer?
+  path: /cloud_provider/properties/softlayer_legacy?
   value: *softlayer
