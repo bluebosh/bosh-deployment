@@ -50,7 +50,7 @@ networks:
     static: ((internal_static_ips))
     reserved: ((internal_reserved_ips))
     cloud_properties:
-      vlan_ids: [((sl_vlan_public_id)), ((sl_vlan_private))]
+      vlan_ids: [((sl_vlan_public)), ((sl_vlan_private))]
 
 - name: dynamic_public
   type: dynamic
